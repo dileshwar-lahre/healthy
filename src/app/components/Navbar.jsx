@@ -54,7 +54,7 @@ const Navbar = () => {
               >
                 <div className="relative w-48 h-12 md:w-60 md:h-16 -mt-1">
                   <Image
-                    src="/images/healthywingswellnessphysiotherapy.jpeg"
+                    src="/images/healthywingswellnessphysiotherapy.png"
                     alt="Healthy Wings Wellness Logo"
                     fill
                     className="object-contain object-left"
