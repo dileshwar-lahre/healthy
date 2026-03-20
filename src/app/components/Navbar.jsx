@@ -1,12 +1,14 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { X, ArrowRight, ChevronRight } from "lucide-react";
+import { X, ArrowRight, ChevronRight, ChevronDown } from "lucide-react";
 import { FiMenu } from "react-icons/fi";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  // Dropdown ke liye naya state
+  const [isMoreOpen, setIsMoreOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,12 +19,19 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // "Our Team" hata diya gaya hai
   const navLinks = [
     { name: "Home", href: "#home" },
     { name: "About", href: "#about" },
     { name: "Services", href: "#services" },
-    { name: "Our Team", href: "#team" },
     { name: "Contact", href: "#contact" },
+  ];
+
+  // Naye pages ke links
+  const moreLinks = [
+    { name: "Terms & Conditions", href: "/terms-conditions" },
+    { name: "Privacy Policy", href: "/privacy-policy" },
+    { name: "Refund Policy", href: "/refund-policy" },
   ];
 
   // ✅ WhatsApp Link
@@ -77,6 +86,39 @@ const Navbar = () => {
                       </a>
                     </li>
                   ))}
+
+                  {/* MORE Dropdown (Desktop) */}
+                  <li className="relative">
+                    <button
+                      onClick={() => setIsMoreOpen(!isMoreOpen)}
+                      className="relative flex items-center gap-1 text-[16px] font-bold tracking-wide transition-all duration-300 text-gray-700 hover:text-black hover:-translate-y-0.5 focus:outline-none"
+                    >
+                      More
+                      <ChevronDown
+                        size={16}
+                        className={`transition-transform duration-300 ${
+                          isMoreOpen ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+
+                    {/* Dropdown Menu List */}
+                    <div
+                      className={`absolute top-full left-0 mt-4 w-52 bg-white rounded-2xl shadow-xl border border-gray-100 py-3 transition-all duration-300 ${
+                        isMoreOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible translate-y-2"
+                      }`}
+                    >
+                      {moreLinks.map((link) => (
+                        <a
+                          key={link.name}
+                          href={link.href}
+                          className="block px-5 py-2.5 text-sm font-semibold text-gray-700 hover:text-black hover:bg-gray-50 transition-colors"
+                        >
+                          {link.name}
+                        </a>
+                      ))}
+                    </div>
+                  </li>
                 </ul>
               </div>
 
@@ -152,6 +194,44 @@ const Navbar = () => {
                 />
               </a>
             ))}
+
+            {/* MORE Dropdown (Mobile) */}
+            <div className="flex flex-col">
+              <button
+                onClick={() => setIsMoreOpen(!isMoreOpen)}
+                className="group flex items-center justify-between text-2xl font-bold text-gray-900 transition-all duration-300 hover:text-black w-full"
+              >
+                More
+                <ChevronDown
+                  size={24}
+                  strokeWidth={2.5}
+                  className={`transition-transform duration-300 ${
+                    isMoreOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+
+              {/* Mobile Sub-links */}
+              <div
+                className={`flex flex-col pl-4 overflow-hidden transition-all duration-300 ${
+                  isMoreOpen ? "max-h-48 mt-4 space-y-4" : "max-h-0"
+                }`}
+              >
+                {moreLinks.map((link) => (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => {
+                      setIsOpen(false);
+                      setIsMoreOpen(false); // Sidebar close hone par ise bhi close kar diya
+                    }}
+                    className="text-lg font-semibold text-gray-600 hover:text-black transition-colors"
+                  >
+                    {link.name}
+                  </a>
+                ))}
+              </div>
+            </div>
           </nav>
 
           {/* Mobile WhatsApp Button */}
