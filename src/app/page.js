@@ -1,6 +1,9 @@
+"use client";
+
 import HeroSection from "./components/HeroSection";
 import AboutSection from "./components/AboutSection";
 import ServicesSection from "./components/ServicesSection";
+import GallerySection from "./components/GallerySection"; // <-- Naya component import kiya
 import ContactSection from "./components/ContactSection";
 
 export default function Home() {
@@ -20,6 +23,11 @@ export default function Home() {
       {/* Services Section */}
       <section id="services" className="scroll-mt-28">
         <ServicesSection />
+      </section>
+
+      {/* Gallery Section - Contact ke upar setup kar diya */}
+      <section id="gallery" className="scroll-mt-28">
+        <GallerySection />
       </section>
 
       {/* Contact Section */}

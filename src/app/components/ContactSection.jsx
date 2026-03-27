@@ -3,25 +3,30 @@
 import { Phone, Mail, MapPin, Clock, ExternalLink, MessageCircle } from "lucide-react";
 
 export default function ContactSection() {
-  // WhatsApp Configuration - Number with Country Code (91)
-  const whatsappNumber = "919202511211";
+  // ✅ UPDATED WhatsApp Number: 9770511211
+  const whatsappNumber = "919770511211";
   const defaultMessage = encodeURIComponent("Hello! I'm interested in booking a physiotherapy appointment. Found you through Stonenox.");
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${defaultMessage}`;
+
+  // 📍 Map URL remains exactly as you requested
+  const mapEmbedUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3697.587849187944!2d82.12449887595305!3d22.0905625507119!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a280d2f81f19691%3A0xa72b7258e1975663!2zSGVhbHRoeSBXaW5nJ3MgUGh5c2lvdGhlcmFweSBhbmQgSG9saXN0aWMgV2VsbG5lc3M!5e0!3m2!1sen!2sin!4v1711558000000!5m2!1sen!2sin";
 
   const contactInfo = [
     {
       icon: <Phone className="w-6 h-6 text-blue-600" />,
       title: "Direct Call",
-      details: ["+91 92025 11211", "+91 77524 42111"],
-      link: "tel:+919202511211",
+      // Mobile updated to 97705 11211
+      details: ["07752-442111 (Landline)", "+91 97705 11211 (Mobile)"],
+      link: "tel:07752442111",
       bgColor: "bg-blue-50",
       hoverBorder: "hover:border-blue-300",
     },
     {
       icon: <MessageCircle className="w-6 h-6 text-green-600" />,
       title: "WhatsApp Chat",
-      details: ["Click to Book Appointment", "+91 92025 11211"],
-      link: whatsappUrl, // Automatic Message Link
+      // Details updated to 97705 11211
+      details: ["Click to Book Appointment", "+91 97705 11211"],
+      link: whatsappUrl,
       bgColor: "bg-green-50",
       hoverBorder: "hover:border-green-400",
     },
@@ -77,7 +82,7 @@ export default function ContactSection() {
               </a>
             ))}
 
-            {/* Address Card (Non-Clickable for Clarity) */}
+            {/* Address Card */}
             <div className="p-6 rounded-[2rem] bg-slate-50 border border-slate-100 flex items-center gap-5">
               <div className="p-4 bg-white rounded-2xl shadow-sm">
                 <MapPin className="w-6 h-6 text-slate-600" />
@@ -85,21 +90,24 @@ export default function ContactSection() {
               <div>
                 <h3 className="font-bold text-slate-900 text-lg">Clinic Address</h3>
                 <p className="text-slate-600 text-sm leading-relaxed">
-                  H2/24 Narmada Nagar Chowk, Nehru Nagar Rd, Bilaspur, CG 495001
+                  <strong>HEALTHY WING'S PHYSIOTHERAPY AND HOLISTIC WELLNESS</strong><br />
+                  H2/24 Narmada Nagar chowk, Nehru Nagar Rd,<br /> 
+                  beside Shiv Mandir, Bilaspur, Chhattisgarh 495001
                 </p>
               </div>
             </div>
           </div>
 
-          {/* RIGHT: Map */}
+          {/* RIGHT: Map Section */}
           <div className="lg:col-span-7 min-h-[500px] w-full rounded-[3.5rem] overflow-hidden shadow-2xl border-8 border-slate-50 relative group">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3697.1234567890!2d82.123456789!3d22.123456789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjLCsDA3JzM0LjQiTiA4MsKwMDcnMjQuNCJF!5e0!3m2!1sen!2sin!4v1234567890"
+              src={mapEmbedUrl}
               width="100%"
               height="100%"
               style={{ border: 0 }}
               allowFullScreen=""
               loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
               className="grayscale-[30%] group-hover:grayscale-0 transition-all duration-1000"
             ></iframe>
             
@@ -109,7 +117,7 @@ export default function ContactSection() {
                 <Clock className="w-5 h-5 text-green-400" />
                 <div>
                   <p className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Open Hours</p>
-                  <p className="text-sm font-bold">Mon - Sat: 10AM - 8PM</p>
+                  <p className="text-sm font-bold">Mon - Sat: 9AM - 9PM</p>
                 </div>
               </div>
             </div>

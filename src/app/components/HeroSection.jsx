@@ -2,7 +2,7 @@
 
 export default function HeroSection() {
   // WhatsApp Configuration
-  const phoneNumber = "919770511211"; // 91 suffix for India
+  const phoneNumber = "919770511211"; 
   const message = encodeURIComponent("Hello! I'm interested in booking a physiotherapy appointment. Found you through Stonenox.");
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
 
@@ -27,16 +27,18 @@ export default function HeroSection() {
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6">
 
         <div className="max-w-3xl">
+          {/* Text Size remains same as original */}
           <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight">
             Feel Better Fast
           </h1>
 
+          {/* New Text with same Size & Color */}
           <p className="mt-5 text-lg md:text-xl text-gray-200">
-            Expert physiotherapy care tailored for you in Crete.
+            Best physiotherapy clinic in Bilaspur.
           </p>
 
           <div className="mt-8">
-            {/* WhatsApp Link */}
+            {/* WhatsApp Link - Book Now Button */}
             <a
               href={whatsappUrl}
               target="_blank"

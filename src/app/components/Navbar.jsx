@@ -3,11 +3,11 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { X, ArrowRight, ChevronRight, ChevronDown } from "lucide-react";
 import { FiMenu } from "react-icons/fi";
+import Link from "next/link"; // Link import kiya hai Next.js ke liye
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  // Dropdown ke liye naya state
   const [isMoreOpen, setIsMoreOpen] = useState(false);
 
   useEffect(() => {
@@ -19,31 +19,25 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // "Our Team" hata diya gaya hai
   const navLinks = [
-    { name: "Home", href: "#home" },
+    { name: "Home", href: "/" }, // Hash ki jagah direct route
     { name: "About", href: "#about" },
     { name: "Services", href: "#services" },
     { name: "Contact", href: "#contact" },
   ];
 
-  // Naye pages ke links
   const moreLinks = [
     { name: "Terms & Conditions", href: "/terms-conditions" },
     { name: "Privacy Policy", href: "/privacy-policy" },
     { name: "Refund Policy", href: "/refund-policy" },
   ];
 
-  // ✅ WhatsApp Link
-  const whatsappLink =
-    "https://wa.me/919770511211?text=Hello%20Healthy%20Wing's%20Physiotherapy,%20I%20would%20like%20to%20book%20an%20appointment.";
+  // ✅ Appointment Page Link
+  const appointmentLink = "/appointment";
 
   return (
     <>
-      {/* NAVBAR */}
       <nav className="fixed top-0 left-0 w-full z-[9999] transition-all duration-500">
-
-        {/* Background */}
         <div
           className={`absolute inset-0 -z-10 transition-all duration-500 ${
             scrolled
@@ -57,8 +51,8 @@ const Navbar = () => {
             <div className="flex justify-between items-center">
 
               {/* Logo */}
-              <a
-                href="#home"
+              <Link
+                href="/"
                 className="relative flex items-center transition-transform hover:scale-105 duration-300"
               >
                 <div className="relative w-48 h-12 md:w-60 md:h-16 -mt-1">
@@ -70,7 +64,7 @@ const Navbar = () => {
                     priority
                   />
                 </div>
-              </a>
+              </Link>
 
               {/* Desktop Links */}
               <div className="hidden lg:flex items-center bg-gray-50/70 px-10 py-3 rounded-full border border-gray-200 backdrop-blur-md">
@@ -87,7 +81,6 @@ const Navbar = () => {
                     </li>
                   ))}
 
-                  {/* MORE Dropdown (Desktop) */}
                   <li className="relative">
                     <button
                       onClick={() => setIsMoreOpen(!isMoreOpen)}
@@ -102,43 +95,40 @@ const Navbar = () => {
                       />
                     </button>
 
-                    {/* Dropdown Menu List */}
                     <div
                       className={`absolute top-full left-0 mt-4 w-52 bg-white rounded-2xl shadow-xl border border-gray-100 py-3 transition-all duration-300 ${
                         isMoreOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible translate-y-2"
                       }`}
                     >
                       {moreLinks.map((link) => (
-                        <a
+                        <Link
                           key={link.name}
                           href={link.href}
                           className="block px-5 py-2.5 text-sm font-semibold text-gray-700 hover:text-black hover:bg-gray-50 transition-colors"
                         >
                           {link.name}
-                        </a>
+                        </Link>
                       ))}
                     </div>
                   </li>
                 </ul>
               </div>
 
-              {/* Desktop CTA → WhatsApp */}
+              {/* ✅ Desktop CTA → Redirect to /appointment */}
               <div className="hidden lg:block">
-                <a
-                  href={whatsappLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center gap-2 bg-black text-white px-8 py-3 rounded-full font-bold transition-all duration-300 hover:bg-gray-900 hover:shadow-xl active:scale-95"
+                <Link
+                  href={appointmentLink}
+                  className="group flex items-center gap-2 bg-black text-white px-8 py-3 rounded-full font-bold transition-all duration-300 hover:bg-green-600 hover:shadow-xl active:scale-95"
                 >
                   Get Appointment
                   <ArrowRight
                     size={18}
                     className="group-hover:translate-x-1 transition-transform duration-300"
                   />
-                </a>
+                </Link>
               </div>
 
-              {/* ✅ Minimal Mobile Icon */}
+              {/* Mobile Menu Icon */}
               <button
                 onClick={() => setIsOpen(true)}
                 className="lg:hidden text-black hover:opacity-70 transition"
@@ -195,7 +185,6 @@ const Navbar = () => {
               </a>
             ))}
 
-            {/* MORE Dropdown (Mobile) */}
             <div className="flex flex-col">
               <button
                 onClick={() => setIsMoreOpen(!isMoreOpen)}
@@ -211,39 +200,37 @@ const Navbar = () => {
                 />
               </button>
 
-              {/* Mobile Sub-links */}
               <div
                 className={`flex flex-col pl-4 overflow-hidden transition-all duration-300 ${
                   isMoreOpen ? "max-h-48 mt-4 space-y-4" : "max-h-0"
                 }`}
               >
                 {moreLinks.map((link) => (
-                  <a
+                  <Link
                     key={link.name}
                     href={link.href}
                     onClick={() => {
                       setIsOpen(false);
-                      setIsMoreOpen(false); // Sidebar close hone par ise bhi close kar diya
+                      setIsMoreOpen(false);
                     }}
                     className="text-lg font-semibold text-gray-600 hover:text-black transition-colors"
                   >
                     {link.name}
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>
           </nav>
 
-          {/* Mobile WhatsApp Button */}
+          {/* ✅ Mobile CTA → Redirect to /appointment */}
           <div className="mt-auto pt-8 border-t border-gray-100">
-            <a
-              href={whatsappLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block text-center w-full bg-black text-white py-4 rounded-2xl font-bold text-lg shadow-lg hover:bg-gray-900 transition"
+            <Link
+              href={appointmentLink}
+              onClick={() => setIsOpen(false)}
+              className="block text-center w-full bg-black text-white py-4 rounded-2xl font-bold text-lg shadow-lg hover:bg-green-600 transition"
             >
               Book Appointment
-            </a>
+            </Link>
           </div>
 
         </div>
